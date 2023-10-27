@@ -7,33 +7,33 @@ import { number } from "zod";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export const metadata = {
-    title: "商品登録- NEXTMAZON"
-}
+  title: "商品登録- NEXTMAZON",
+};
 
 async function addProduct(formData: FormData) {
-    "use server";
+  "use server";
 
-    const name = formData.get("name")?.toString();
-    const description = formData.get("description")?.toString();
-    const imageUrl = formData.get("imageUrl")?.toString();
-    const price = Number(formData.get("price") || 0);
+  const name = formData.get("name")?.toString();
+  const description = formData.get("description")?.toString();
+  const imageUrl = formData.get("imageUrl")?.toString();
+  const price = Number(formData.get("price") || 0);
 
-    if (!name || !description || !imageUrl || !price) {
-        throw Error("Missing required fields");
-    } 
+  if (!name || !description || !imageUrl || !price) {
+    throw Error("Missing required fields");
+  }
 
-    await prisma.product.create({
-        data: {name, description, imageUrl, price},
-    });
+  await prisma.product.create({
+    data: { name, description, imageUrl, price },
+  });
 
-    redirect("/");
+  redirect("/");
 }
 
 export default async function AddProductPage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/api/auth/signin?callbackUrl=/add-product")
+    redirect("/api/auth/signin?callbackUrl=/add-product");
   }
 
   return (
@@ -66,7 +66,7 @@ export default async function AddProductPage() {
           type="number"
           className="input input-bordered mb-3 w-full"
         />
-        <FormSubmitButton className="btn-block mb-3" >
+        <FormSubmitButton className="btn-block mb-3">
           Add Product
         </FormSubmitButton>
       </form>
