@@ -1,8 +1,10 @@
 import FormSubmitButton from "@/components/FormSubmitButton";
 import prisma from "@/lib/db/prisma";
 import { error } from "console";
+import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { number } from "zod";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export const metadata = {
     title: "商品登録- NEXTMAZON"
@@ -27,7 +29,13 @@ async function addProduct(formData: FormData) {
     redirect("/");
 }
 
-export default function AddProductPage() {
+export default async function AddProductPage() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/api/auth/signin?callbackUrl=/add-product")
+  }
+
   return (
     <div>
       <h1 className="mb-3 text-lg font-bold">Add Product</h1>
