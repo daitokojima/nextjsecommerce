@@ -4,7 +4,7 @@ import { setProductQuantity } from "./actions";
 import { formatPrice } from "@/lib/format";
 
 export const metadata = {
-    title: "買い物かご - Nextmazon"
+    title: "買い物かご - KOJIMAZON"
 }
 
 export default async function CartPage() {

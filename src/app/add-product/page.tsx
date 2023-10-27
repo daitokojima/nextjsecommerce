@@ -7,7 +7,7 @@ import { number } from "zod";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
 export const metadata = {
-  title: "商品登録- NEXTMAZON",
+  title: "商品登録- KOJIMAZON",
 };
 
 async function addProduct(formData: FormData) {
